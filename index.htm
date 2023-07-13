@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scam Website Detector</title>
+</head>
+<body>
+<form action="/" method="get">
+<input type="text" name="domain" placeholder="Enter domain">
+<input type="submit" value="Submit">
+</form>
+
+<div id="result"></div>
+
+<script>
+function getResult() {
+  var domain = document.getElementById("domain").value;
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/?domain=" + domain);
+  xhr.onload = function() {
+    if (xhr.status == 200) {
+      var result = JSON.parse(xhr.responseText);
+      document.getElementById("result").innerHTML = result.message;
+    } else {
+      document.getElementById("result").innerHTML = "Error";
+    }
+  };
+  xhr.send();
+}
+</script>
+</body>
+</html>
